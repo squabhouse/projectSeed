@@ -1,16 +1,41 @@
 // congtrollers and what not
-var app = angular.module('SeedProject', []);
+angular.module('SeedProject', ['ui.router'])
 
-app.controller('Controller', function($scope) {
-	$scope.variables = [
-		{ 
-		  id: 1,
-		  name: "Ted",
-	      sex: "Male"},
+.config([
+	'$stateProvider',
+	'$urlRouterProvider',
+	function($stateProvider, $urlRouterProvider) {
 
-	    { 
-		  id: 2,
-		  name: "Dan",
-	      sex: "Male"}
-	];
-});
+		$stateProvider
+			.state('home', {
+				url: '/home',
+				templateUrl: '/home.html',
+				controller: 'Controller'
+			})
+		;
+
+		$urlRouterProvider.otherwise('home');
+
+	}
+])
+
+.controller('Controller', [
+	'$scope',
+	function($scope) {
+
+		$scope.entries = [];
+
+		$scope.addEntry = function() {
+			if ($scope.name === '' | $scope.desc === '') {return;}
+
+			$scope.entries.push({
+				name: $scope.name,
+				desc: $scope.desc}
+			);
+
+			$scope.name = '';
+			$scope.desc = '';
+		}
+
+
+}]);

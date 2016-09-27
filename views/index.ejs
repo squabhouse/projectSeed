@@ -1,12 +1,13 @@
 <!doctype html>
 
-	<html ng-app="SeedProject">
+	<html>
 
 		<meta charset="UTF-8">
 
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-		<script src="javaScripts/angularApp.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+		<script src="/javaScripts/angularApp.js"></script>
 
 
 		<style> -glyphicon-thumbs-up { cursor:pointer } </style>
@@ -22,7 +23,7 @@
 		<head>
 			<title>Seed Project</title>
 			<div class="col-sm-3 col-sm-offset-4">
-				<h1>Head</h1>
+				<h1>BasicSchema</h1>
 			</div>
 		</head>
 		<br>
@@ -35,30 +36,80 @@
 
 
 		<!-- Body -->
-		<body ng-controller="Controller">
-
+		<body ng-app="SeedProject">
 			<div class="row">
-				<div class="col-sm-3 col-sm-offset-4">
-					<div ng-repeat="variable in variables | orderBy: 'id'">
-						<span style="font-size: 20px; margin-left: 10px;">
-							{{variable.name}} {{variable.sex}}
-						</span>
-					</div>
+				<div class="col-md-6 col-md-offset-3">
+					<ui-view></ui-view>
 				</div>
-			</row>
-
+			</div>
 		</body>
 		<br>
 
 
 
+		<!-- ********************** -->
+		<!-- Template for home page -->
+		<!-- ********************** -->
 
+		<script type="text/ng-template" id="/home.html">
 
-		<!-- footer -->
-		<footer>
-			<div class="col-sm-3 col-sm-offset-4">
-				<h2>Footer</h2>
+			<div class="page-header">
+				<h2>Enter values for db entry</h2>
 			</div>
-		</footer>
+
+			<div class="row">
+				<div class="col-sm-3 col-sm-offset-4">
+
+					<form ng-submit="addEntry()" style="margin-top: 30px;">
+
+						<div class="form-group">
+							<input type="text"
+							       class="form-control"
+							       placeholder="name"
+							       ng-model="name">
+							</input>
+						</div>
+
+						<div class="form-group" style="margin-top: 30px;">
+							<input type="text"
+							       class="form-control"
+							       placeholder="desc"
+							       ng-model="desc">
+							</input>
+						</div>
+
+						<button type="submit" class="btn btn-primary>">Submit</button>
+
+					</form>
+
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-3 col-sm-offset-4">
+					<div ng-repeat="entry in entries">
+						<span style="font-size: 45px; margin-left: 18px;">
+							{{entry.name}} {{entry.desc}}
+						</span>
+					</div>
+				</div>
+			</div>
+
+
+		</script>
+
+
+
+
+
+		<!-- ************************ -->
+		<!-- Template for second page -->
+		<!-- ************************ -->
+
+		<script type="text/ng-template" id="/second.html">
+			<div class="page-header">
+				<h2>Enter values for db entry</h2>
+			</div>
+		</script>
 
 	</html>
